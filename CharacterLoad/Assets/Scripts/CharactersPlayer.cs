@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using CartoonHeroes;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class CharactersPlayer : MonoBehaviour
@@ -11,11 +8,12 @@ public class CharactersPlayer : MonoBehaviour
     [SerializeField] private GameObject rootCharacter;
 
     [SerializeField] private List<GameObject> characters;
-    private CharacterLoader loader;
 
     [SerializeField] private Texture2D _texture2D;
-    
-    private Vector3 offset = new Vector3(2,0,0);
+    private CharacterLoader loader;
+
+    private Vector3 offset = new Vector3(2, 0, 0);
+
     private void Start()
     {
         loader = Resources.Load<CharacterLoader>("CharacterLoader");
@@ -24,13 +22,14 @@ public class CharactersPlayer : MonoBehaviour
         {
             var btn = Instantiate(baseButton, rootUI.transform);
             btn.GetComponent<CharactersButton>().Setup(objName, OnSpawnCharacters,
-                OnColorChange,OnTextureHairChange);
+                OnColorChange, OnTextureHairChange);
         }
     }
+
     private void OnSpawnCharacters(string id)
     {
         var asset = loader.GetCharacter(id);
-        var obj = Instantiate(asset, offset , Quaternion.identity);
+        var obj = Instantiate(asset, offset, Quaternion.identity);
         obj.name = id;
         characters.Add(obj);
         offset += offset;
@@ -39,14 +38,14 @@ public class CharactersPlayer : MonoBehaviour
 
     private void OnColorChange(string id, float value)
     {
-      
         var f = characters.Find(x => x.name == id);
         if (f != null)
         {
             var custom = f.gameObject.GetComponent<CharacterCustom>();
-            custom.SetClothesColor(new Color(value,value,value,1f));
+            custom.SetClothesColor(new Color(value, value, value, 1f));
         }
     }
+
     private void OnTextureHairChange(string id)
     {
         var f = characters.Find(x => x.name == id);
@@ -57,4 +56,3 @@ public class CharactersPlayer : MonoBehaviour
         }
     }
 }
-

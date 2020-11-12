@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CharacterCustom : MonoBehaviour
 {
@@ -14,10 +12,8 @@ public class CharacterCustom : MonoBehaviour
 
     public void SetClothesColor(Color color)
     {
-        for (int i = 0; i < _skinnedMeshRendererClothes.Length; i++)
-        {
+        for (var i = 0; i < _skinnedMeshRendererClothes.Length; i++)
             _skinnedMeshRendererClothes[i].material.color = color;
-        }
     }
 
     public void SetHairTexture(Texture2D texture2D)
